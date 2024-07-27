@@ -4,5 +4,6 @@ data/.stxxl
 data/snomed-ct.nt
 
 # Ignore artifacts created during index building.
+data/snomed-ct.meta-data.json
 data/*index*
 data/*vocabulary*
