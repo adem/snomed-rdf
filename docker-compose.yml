@@ -32,3 +32,13 @@ services:
     init: true
     depends_on:
       - index_builder
+
+  ui:
+    build:
+      context: ./ui
+      dockerfile: Dockerfile
+    container_name: ui
+    ports:
+      - "3000:80"
+    depends_on:
+      - qlever
