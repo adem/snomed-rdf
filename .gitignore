@@ -1,0 +1,8 @@
+data/.stxxl
+
+# Ignore RMLMapper artifact.
+data/snomed-ct.nt
+
+# Ignore artifacts created during index building.
+data/*index*
+data/*vocabulary*

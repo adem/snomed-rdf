@@ -1,0 +1,34 @@
+---
+services:
+  rmlmapper:
+    image: rmlio/rmlmapper-java:v7.0.0
+    platform: linux/amd64
+    command: rmlmapper -m mapping.ttl -o snomed-ct.nt
+    volumes:
+      - ./data:/data
+
+  index_builder:
+    image: docker.io/adfreiburg/qlever:latest
+    container_name: index_builder
+    entrypoint: [ "sh", "-c", "while [ ! -f /index/snomed-ct.nt ]; do sleep 2; done && cat snomed-ct.nt | IndexBuilderMain -F ttl -f - -i snomed-ct -s snomed-ct.settings.json --stxxl-memory 5G | tee snomed-ct.index-log.txt && tail -f /dev/null" ]
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./data:/index
+    working_dir: /index
+    init: true
+    depends_on:
+      - rmlmapper
+
+  qlever:
+    image: docker.io/adfreiburg/qlever:latest
+    container_name: qlever
+    entrypoint: [ "sh", "-c", "while [ ! -f /index/snomed-ct.index-log.txt ]; do sleep 2; done && ServerMain --index-basename snomed-ct --port 8000" ]
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./data:/index
+    ports:
+      - "8000:8000"
+    working_dir: /index
+    init: true
+    depends_on:
+      - index_builder

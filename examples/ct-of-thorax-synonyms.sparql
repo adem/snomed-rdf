@@ -1,0 +1,9 @@
+PREFIX ex: <http://example.com/ns#>
+SELECT ?term WHERE {
+	?subject ex:term ?inputTerm .
+	FILTER(CONTAINS(LCASE(?inputTerm), LCASE("ct of thorax")))
+	?subject ex:conceptId ?conceptId .
+	?otherSubject ex:conceptId ?conceptId .
+	?otherSubject ex:term ?term .
+}
+LIMIT 10
