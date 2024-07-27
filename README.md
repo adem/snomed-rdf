@@ -13,6 +13,6 @@ curl -X POST http://localhost:8000/api/snomed-ct \
 # Caveats
 - The input data provided in `data/snomed-ct.csv` is a very small subset of the file `sct2_Description_Full-en_INT_20240501.txt` terminology dataset provided in the SNOMED CT International Edition release. The full version can be obtained at https://mlds.ihtsdotools.org via an MLDS license.
 
-# To do
+# To-dos
 - [ ] Investigate [snomed-owl-toolkit](https://github.com/IHTSDO/snomed-owl-toolkit)
 - [ ] Provide a rudimentary web interface
