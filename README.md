@@ -6,7 +6,7 @@ Link SNOMED CT terminology using RDF for semantic data integration.
 ```
 git clone https://github.com/adem/snomed-rdf.git && \
   cd snomed-rdf && \
-  docker compose up -d`
+  docker compose up -d
 ```
 - Perform an example query:
 ```
